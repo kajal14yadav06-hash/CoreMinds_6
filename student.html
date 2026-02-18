@@ -1,0 +1,458 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Student Panel</h2>
+      <ul>
+        <li onclick="showSection('overview')">Overview</li>
+        <li onclick="showSection('tasks')">Tasks</li>
+        <li onclick="showSection('documents')">Documents</li>
+        <li onclick="showSection('ai')">AI Assistance</li>
+        <li onclick="showSection('profile')">Profile</li>
+      </ul>
+      <a href="index.html" class="logout">Logout</a>
+    </div>
+
+    <div class="content">
+      <!-- ================= OVERVIEW ================= -->
+      <div id="overview" class="section active">
+        <div class="overview-wrapper">
+          <h2>Welcome Back 👋</h2>
+          <p class="welcome-sub">
+            Here's your Onboarding progress and pending tasks
+          </p>
+
+          <div class="progress-card">
+            <div class="progress-header">
+              <h3>Onboarding Progress</h3>
+              <span class="progress-percent">32%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 32%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-item completed">
+          <h4>Document Verification</h4>
+          <p>Submit and verify all academic documents</p>
+          <button class="details-btn" onclick="openModal('docModal')">
+            View Details
+          </button>
+          <div class="mini-bar">
+            <div class="mini-fill green" style="width: 100%"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <h4>Fee Payment</h4>
+          <p>Complete tuition and hostel fee payment</p>
+          <button class="details-btn" onclick="openModal('feeModal')">
+            View Details
+          </button>
+          <div class="mini-bar">
+            <div class="mini-fill purple" style="width: 60%"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <h4>LMS & System Setup</h4>
+          <p>Activate campus systems and accounts</p>
+          <button class="details-btn" onclick="openModal('lmsModal')">
+            View Details
+          </button>
+          <div class="mini-bar">
+            <div class="mini-fill" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <h4>Hostel Allocation</h4>
+          <p>Complete hostel preferences and assignment</p>
+          <button class="details-btn" onclick="openModal('hostelModal')">
+            View Details
+          </button>
+          <div class="mini-bar">
+            <div class="mini-fill" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <h4>Orientation & Compliance</h4>
+          <p>Complete mandatory training modules</p>
+          <button class="details-btn" onclick="openModal('orientationModal')">
+            View Details
+          </button>
+          <div class="mini-bar">
+            <div class="mini-fill" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TASKS ================= -->
+      <div id="tasks" class="section task">
+        <h2 class="task-title">Task Checklist</h2>
+        <p class="task-progress-text">
+          <span id="completedCount">3</span> of
+          <span id="totalTasks">7</span> tasks completed (<span
+            id="progressPercent"
+            >42%</span
+          >)
+        </p>
+
+        <div class="task-list">
+          <div class="task-card completed">
+            <div class="task-left">
+              <div class="status-icon">✔</div>
+              <div>
+                <h3>Submit Academic Documents</h3>
+                <p>Upload 10th, 12th mark sheets and entrance exam scorecard</p>
+                <div class="task-meta">
+                  <span class="tag documentation">Documentation</span>
+                  <span class="due-date">Due: 10/2/2026</span>
+                </div>
+              </div>
+            </div>
+            <span class="status-badge completed-badge">completed</span>
+          </div>
+
+          <div class="task-card in-progress">
+            <div class="task-left">
+              <div class="status-icon">⏳</div>
+              <div>
+                <h3>Complete Fee Payment</h3>
+                <p>Pay first semester tuition fee online</p>
+                <div class="task-meta">
+                  <span class="tag finance">Finance</span>
+                  <span class="due-date">Due: 20/2/2026</span>
+                </div>
+              </div>
+            </div>
+            <span class="status-badge progress-badge">in progress</span>
+          </div>
+
+          <div class="task-card pending">
+            <div class="task-left">
+              <div class="status-icon">○</div>
+              <div>
+                <h3>LMS Account Setup</h3>
+                <p>Activate your Learning Management System account</p>
+                <div class="task-meta">
+                  <span class="tag academic">Academic</span>
+                  <span class="due-date">Due: 25/2/2026</span>
+                </div>
+              </div>
+            </div>
+            <span class="status-badge pending-badge">pending</span>
+          </div>
+
+          <div class="task-card pending">
+            <div class="task-left">
+              <div class="status-icon">○</div>
+              <div>
+                <h3>Hostel Allocation Form</h3>
+                <p>Fill hostel preference and roommate details</p>
+                <div class="task-meta">
+                  <span class="tag accommodation">Accommodation</span>
+                  <span class="due-date">Due: 22/3/2026</span>
+                </div>
+              </div>
+            </div>
+            <span class="status-badge pending-badge">pending</span>
+          </div>
+
+          <div class="task-card in-progress">
+            <div class="task-left">
+              <div class="status-icon">⏳</div>
+              <div>
+                <h3>Medical Certificate Upload</h3>
+                <p>Submit medical fitness certificate</p>
+                <div class="task-meta">
+                  <span class="tag health">Health</span>
+                  <span class="due-date">Due: 20/4/2026</span>
+                </div>
+              </div>
+            </div>
+            <span class="status-badge progress-badge">in progress</span>
+          </div>
+
+          <div class="task-card completed">
+            <div class="task-left">
+              <div class="status-icon">✔</div>
+              <div>
+                <h3>Mentor Meeting Schedule</h3>
+                <p>Book slot for first meeting with assigned mentor</p>
+                <div class="task-meta">
+                  <span class="tag mentoring">Mentoring</span>
+                  <span class="due-date">Due: 28/2/2026</span>
+                </div>
+              </div>
+            </div>
+            <span class="status-badge completed-badge">completed</span>
+          </div>
+
+          <div class="task-card completed">
+            <div class="task-left">
+              <div class="status-icon">✔</div>
+              <div>
+                <h3>Anti-Ragging Compliance</h3>
+                <p>Complete anti-ragging awareness module</p>
+                <div class="task-meta">
+                  <span class="tag compliance">Compliance</span>
+                  <span class="due-date">Due: 18/4/2026</span>
+                </div>
+              </div>
+            </div>
+            <span class="status-badge completed-badge">completed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= DOCUMENTS ================= -->
+      <!-- ================= DOCUMENT MANAGEMENT ================= -->
+      <div id="documents" class="section">
+        <h2 class="doc-title">📂 Document Management</h2>
+        <p class="doc-sub">Upload and track your onboarding documents</p>
+
+        <!-- Status Filter Buttons -->
+        <div class="doc-filters">
+          <button class="filter-btn active" onclick="filterDocs('all')">
+            All
+          </button>
+          <button class="filter-btn verified" onclick="filterDocs('verified')">
+            Verified
+          </button>
+          <button class="filter-btn pending" onclick="filterDocs('pending')">
+            Pending Review
+          </button>
+          <button
+            class="filter-btn not-uploaded"
+            onclick="filterDocs('not-uploaded')"
+          >
+            Not Uploaded
+          </button>
+        </div>
+
+        <!-- Document List -->
+        <div class="doc-list">
+          <!-- Document Card -->
+          <div class="doc-card verified" data-status="verified">
+            <span class="doc-status verified-badge">Verified</span>
+            <h3>10th Marksheet</h3>
+            <span
+              class="eye-icon"
+              onclick="openDocModal('10th Marksheet', 'verified')"
+              >👁</span
+            >
+          </div>
+
+          <div class="doc-card pending" data-status="pending">
+            <span class="doc-status pending-badge">Pending Review</span>
+            <h3>12th Marksheet</h3>
+            <span
+              class="eye-icon"
+              onclick="openDocModal('12th Marksheet', 'pending')"
+              >👁</span
+            >
+          </div>
+
+          <div class="doc-card not-uploaded" data-status="not-uploaded">
+            <span class="doc-status not-uploaded-badge">Not Uploaded</span>
+            <h3>Entrance Exam Scorecard</h3>
+            <span
+              class="eye-icon"
+              onclick="openDocModal('Entrance Exam Scorecard', 'not-uploaded')"
+              >👁</span
+            >
+          </div>
+
+          <div class="doc-card not-uploaded" data-status="not-uploaded">
+            <span class="doc-status not-uploaded-badge">Not Uploaded</span>
+            <h3>Medical Certificate</h3>
+            <span
+              class="eye-icon"
+              onclick="openDocModal('Medical Certificate', 'not-uploaded')"
+              >👁</span
+            >
+          </div>
+
+          <div class="doc-card verified" data-status="verified">
+            <span class="doc-status verified-badge">Verified</span>
+            <h3>Photo Identity</h3>
+            <span
+              class="eye-icon"
+              onclick="openDocModal('Photo Identity', 'verified')"
+              >👁</span
+            >
+          </div>
+
+          <div class="doc-card pending" data-status="pending">
+            <span class="doc-status pending-badge">Pending Review</span>
+            <h3>Address Proof</h3>
+            <span
+              class="eye-icon"
+              onclick="openDocModal('Address Proof', 'pending')"
+              >👁</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Document Modal -->
+      <div id="docModalCustom" class="custom-modal">
+        <span class="close-btn" onclick="closeModal()">×</span>
+        <h3 id="modalDocTitle"></h3>
+        <p id="modalDocStatus"></p>
+        <input type="file" />
+        <br /><br />
+        <button>Upload / Re-upload</button>
+      </div>
+
+      <!-- ================= AI ASSISTANT ================= -->
+      <div id="ai" class="section">
+        <h2 class="ai-title">🤖 AI Assistant</h2>
+        <p class="ai-sub">
+          Get instant answers to your onboarding questions 24/7
+        </p>
+
+        <!-- Quick Questions -->
+        <div class="quick-questions">
+          <button onclick="quickAsk('What documents do I need to submit?')">
+            What documents do I need?
+          </button>
+          <button onclick="quickAsk('How do I pay my fee?')">
+            How do I pay my fee?
+          </button>
+          <button onclick="quickAsk('When is hostel allocation deadline?')">
+            Hostel deadline?
+          </button>
+          <button onclick="quickAsk('How do I access LMS?')">
+            How to access LMS?
+          </button>
+          <button onclick="quickAsk('Who is my assigned mentor?')">
+            Who is my mentor?
+          </button>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+          <div class="chat-messages" id="chatMessages">
+            <div class="message ai-message">
+              Hi 👋 I am your onboarding assistant. Ask me anything!
+            </div>
+          </div>
+
+          <div class="chat-input-area">
+            <input
+              type="text"
+              id="chatInputNew"
+              placeholder="Ask me anything about your onboarding..."
+            />
+            <button onclick="sendAIMessage()">➤</button>
+          </div>
+        </div>
+      </div>
+    
+      <!-- ================= PROFILE ================= -->
+<div id="profile" class="section">
+
+  <h2 class="profile-title">👤 Student Profile</h2>
+  <p class="profile-sub">Your personal information and onboarding status</p>
+
+  <div class="profile-container">
+
+    <!-- LEFT SIDE -->
+    <div class="profile-card-new">
+
+      <div class="profile-avatar">KY</div>
+
+      <h3>Kajal Yadav</h3>
+      <p class="enrollment">Enrollment: 2024CST001</p>
+
+      <div class="profile-info">
+        <p>📧 kajal.yadav@student.collegeeducation</p>
+        <p>📞 +91 9876543210</p>
+        <p>📍 Mumbai, Maharashtra</p>
+        <p>📅 Joined: July 2024</p>
+      </div>
+
+      <button class="edit-btn">Edit Profile</button>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="profile-details">
+
+      <!-- Academic Details -->
+      <div class="profile-box">
+        <h4>🎓 Academic Details</h4>
+        <p><strong>Branch:</strong> Computer Science & Technology</p>
+        <p><strong>Semester:</strong> 4th Semester</p>
+        <p><strong>Batch:</strong> 2024 - 2028</p>
+        <p><strong>Assigned Mentor:</strong> Prof. Sharma</p>
+      </div>
+
+      <!-- Onboarding Status -->
+      <div class="profile-box">
+        <h4>📊 Onboarding Status</h4>
+        <p>Tasks Completed: 4 / 7</p>
+        <p>Documents Verified: 3 / 6</p>
+        <p>Days Remaining: 18 days</p>
+      </div>
+
+      <!-- Upcoming Deadlines -->
+      <div class="profile-box">
+        <h4>⏰ Upcoming Deadlines</h4>
+        <ul>
+          <li>Fee Payment – 20 Feb 2026</li>
+          <li>Hostel Allocation – 22 Mar 2026</li>
+          <li>Anti-Ragging Form – 18 Apr 2026</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+    <!-- ================= MODALS ================= -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModal()"></div>
+
+    <div id="docModal" class="custom-modal">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <h3>Document Verification</h3>
+      <p>Upload 10th, 12th mark sheets and entrance exam scorecard.</p>
+    </div>
+
+    <div id="feeModal" class="custom-modal">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <h3>Fee Payment</h3>
+      <p>Complete tuition and hostel payment before deadline.</p>
+    </div>
+
+    <div id="lmsModal" class="custom-modal">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <h3>LMS & System Setup</h3>
+      <p>Activate your LMS login and college email account.</p>
+    </div>
+
+    <div id="hostelModal" class="custom-modal">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <h3>Hostel Allocation</h3>
+      <p>Submit hostel preference form and roommate details.</p>
+    </div>
+
+    <div id="orientationModal" class="custom-modal">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <h3>Orientation & Compliance</h3>
+      <p>Complete mandatory training and campus orientation program.</p>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

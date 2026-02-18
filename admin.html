@@ -1,0 +1,473 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Admin Portal</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Admin Portal</h2>
+      <ul>
+        <li onclick="showSection('overviewA')">Overview</li>
+        <li onclick="showSection('students')">Students</li>
+        <li onclick="showSection('documentsA')">Documents</li>
+        <li onclick="showSection('analysis')">Analysis</li>
+      </ul>
+      <a href="index.html" class="logout">Logout</a>
+    </div>
+
+    <div class="content">
+      <!-- ================= ADMIN OVERVIEW ================= -->
+      <div id="overviewA" class="section active">
+        <h2 class="admin-title">🛠 Admin Dashboard</h2>
+        <p class="admin-sub">Monitor and manage student onboarding processes</p>
+
+        <!-- Four Overview Cards -->
+        <div class="overview-cards">
+          <div class="overview-card total-students">
+            <div class="card-icon">👥</div>
+            <h3>120</h3>
+            <p>Total Students</p>
+          </div>
+          <div class="overview-card completed">
+            <div class="card-icon">✅</div>
+            <h3>80</h3>
+            <p>Completed Onboarding</p>
+          </div>
+          <div class="overview-card in-process">
+            <div class="card-icon">⏳</div>
+            <h3>30</h3>
+            <p>In Process</p>
+          </div>
+          <div class="overview-card at-risk">
+            <div class="card-icon">⚠️</div>
+            <h3>10</h3>
+            <p>At Risk</p>
+          </div>
+        </div>
+
+        <!-- Tasks Completion Graph -->
+        <div class="graph-container">
+          <h4>Task Completion Status</h4>
+          <div class="bar-graph">
+            <div class="bar completed-bar" style="width: 70%">
+              Completed Docs (70%)
+            </div>
+            <div class="bar pending-bar" style="width: 30%">
+              Pending Docs (30%)
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly Student Progress -->
+        <div class="weekly-progress">
+          <h4>Weekly Student Progress</h4>
+          <canvas id="weeklyChart" height="120"></canvas>
+          <div class="week-bars">
+            <div class="day-bar" style="height: 40%">Mon</div>
+            <div class="day-bar" style="height: 60%">Tue</div>
+            <div class="day-bar" style="height: 50%">Wed</div>
+            <div class="day-bar" style="height: 80%">Thu</div>
+            <div class="day-bar" style="height: 70%">Fri</div>
+            <div class="day-bar" style="height: 90%">Sat</div>
+          </div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="recent-activities">
+          <h4>Recent Activities</h4>
+          <ul>
+            <li>📝 Sharvari Sawant submitted Medical Certificate</li>
+            <li>💰 Rutuja Pote completed Fee Payment</li>
+            <li>🔑 Kajal Yadav activated LMS Account</li>
+            <li>📅 Sanskruti Sawant scheduled Mentor Meeting</li>
+            <li>⚠️ Nutan Jadhav Document Verification Pending</li>
+            <li>✅ Pooja Zore completed everything</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ================= STUDENTS MANAGEMENT ================= -->
+      <div id="students" class="section">
+        <h2 class="admin-title">👨‍🎓 Student Management</h2>
+        <p class="admin-sub">Monitor and manage individual student progress</p>
+
+        <!-- Search + Status Filter -->
+        <div class="student-controls">
+          <input
+            type="text"
+            id="studentSearch"
+            placeholder="Search by Name or Enrollment ID"
+            onkeyup="filterStudents()"
+          />
+          <select id="statusFilter" onchange="filterStudents()">
+            <option value="all">All Status</option>
+            <option value="completed">Completed</option>
+            <option value="in-progress">In Progress</option>
+            <option value="at-risk">At Risk</option>
+          </select>
+        </div>
+
+        <!-- Students Table -->
+        <div class="student-table-container">
+          <table class="student-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Enrollment</th>
+                <th>Branch</th>
+                <th>Progress</th>
+                <th>Tasks</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="studentTableBody">
+              <!-- Student Row Template -->
+              <tr class="student-row completed">
+                <td>Kajal Yadav</td>
+                <td>2024CST001</td>
+                <td>CST</td>
+                <td>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 86%"></div>
+                  </div>
+                  <span>86%</span>
+                </td>
+                <td>7 / 6 completed</td>
+                <td>Completed</td>
+                <td>
+                  <button onclick="viewStudent('Kajal Yadav')">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="student-row in-progress">
+                <td>Sharvari Sawant</td>
+                <td>2024CST002</td>
+                <td>CST</td>
+                <td>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%"></div>
+                  </div>
+                  <span>60%</span>
+                </td>
+                <td>7 / 4 completed</td>
+                <td>In Progress</td>
+                <td>
+                  <button onclick="viewStudent('Sharvari Sawant')">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="student-row in-progress">
+                <td>Rutuja Pote</td>
+                <td>2024CST003</td>
+                <td>CST</td>
+                <td>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 55%"></div>
+                  </div>
+                  <span>55%</span>
+                </td>
+                <td>7 / 3 completed</td>
+                <td>In Progress</td>
+                <td>
+                  <button onclick="viewStudent('Rutuja Pote')">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="student-row completed">
+                <td>Sanskruti Sawant</td>
+                <td>2024CST004</td>
+                <td>CST</td>
+                <td>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 90%"></div>
+                  </div>
+                  <span>90%</span>
+                </td>
+                <td>7 / 6 completed</td>
+                <td>Completed</td>
+                <td>
+                  <button onclick="viewStudent('Sanskruti Sawant')">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="student-row at-risk">
+                <td>Nutan Jadhav</td>
+                <td>2024CST005</td>
+                <td>CST</td>
+                <td>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 35%"></div>
+                  </div>
+                  <span>35%</span>
+                </td>
+                <td>7 / 2 completed</td>
+                <td>At Risk</td>
+                <td>
+                  <button onclick="viewStudent('Nutan Jadhav')">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="student-row completed">
+                <td>Pooja Zore</td>
+                <td>2024CST006</td>
+                <td>CST</td>
+                <td>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                  </div>
+                  <span>100%</span>
+                </td>
+                <td>7 / 7 completed</td>
+                <td>Completed</td>
+                <td>
+                  <button onclick="viewStudent('Pooja Zore')">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Student Details Modal -->
+      <div id="studentModal" class="custom-modal">
+        <span class="close-btn" onclick="closeStudentModal()">×</span>
+        <h3 id="modalStudentName">Student Name</h3>
+        <p>Enrollment: <span id="modalEnrollment"></span></p>
+        <p>Email: <span id="modalEmail"></span></p>
+        <p>Branch: <span id="modalBranch"></span></p>
+        <p>Contact: <span id="modalContact"></span></p>
+        <p>Onboarding Progress: <span id="modalProgress"></span></p>
+      </div>
+      <div
+        id="studentOverlay"
+        class="modal-overlay"
+        onclick="closeStudentModal()"
+      ></div>
+
+      <!-- ================= DOCUMENT VERIFICATION ================= -->
+      <div id="documentsA" class="section">
+        <h2 class="admin-title">📄 Document Verification</h2>
+        <p class="admin-sub">
+          Review and verify student's document submissions
+        </p>
+
+        <!-- Status Boxes -->
+        <div class="doc-status-boxes">
+          <div class="doc-box pending">
+            <h3>3</h3>
+            <p>Pending Review</p>
+          </div>
+          <div class="doc-box review">
+            <h3>2</h3>
+            <p>Waiting for Action</p>
+          </div>
+          <div class="doc-box verified">
+            <h3>1</h3>
+            <p>Verified</p>
+          </div>
+          <div class="doc-box rejected">
+            <h3>0</h3>
+            <p>Rejected</p>
+          </div>
+        </div>
+
+        <!-- Search + Filter -->
+        <div class="student-controls">
+          <input
+            type="text"
+            id="docSearch"
+            placeholder="Search by Name, Enrollment, or Document"
+            onkeyup="filterDocs()"
+          />
+          <select id="docFilter" onchange="filterDocs()">
+            <option value="all">All Documents</option>
+            <option value="pending">Pending</option>
+            <option value="verified">Verified</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+
+        <!-- Documents Table -->
+        <div class="student-table-container">
+          <table class="student-table">
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Enrollment</th>
+                <th>Document Type</th>
+                <th>Upload Date</th>
+                <th>File Size</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="docTableBody">
+              <tr class="doc-row pending">
+                <td>Kajal Yadav</td>
+                <td>2024CST001</td>
+                <td>10th Mark Sheet</td>
+                <td>10/02/2026</td>
+                <td>120 KB</td>
+                <td>Pending</td>
+                <td><button onclick="reviewDocument(this)">Review</button></td>
+              </tr>
+
+              <tr class="doc-row pending">
+                <td>Sharwari Sawant</td>
+                <td>2024CST002</td>
+                <td>Medical Certificate</td>
+                <td>12/02/2026</td>
+                <td>200 KB</td>
+                <td>Pending</td>
+                <td><button onclick="reviewDocument(this)">Review</button></td>
+              </tr>
+
+              <tr class="doc-row review">
+                <td>Rutuja Pote</td>
+                <td>2024CST003</td>
+                <td>Entrance Exam Score</td>
+                <td>11/02/2026</td>
+                <td>150 KB</td>
+                <td>Waiting</td>
+                <td><button onclick="reviewDocument(this)">Review</button></td>
+              </tr>
+
+              <tr class="doc-row verified">
+                <td>Sanskriti Sawant</td>
+                <td>2024CST004</td>
+                <td>Photo ID Proof</td>
+                <td>09/02/2026</td>
+                <td>80 KB</td>
+                <td>Verified</td>
+                <td><button onclick="reviewDocument(this)">Review</button></td>
+              </tr>
+
+              <tr class="doc-row rejected">
+                <td>Nutan Jadhav</td>
+                <td>2024CST005</td>
+                <td>Address Proof</td>
+                <td>10/02/2026</td>
+                <td>100 KB</td>
+                <td>Rejected</td>
+                <td><button onclick="reviewDocument(this)">Review</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Document Review Modal -->
+      <div id="docReviewModal" class="custom-modal">
+        <span class="close-btn" onclick="closeDocModal()">×</span>
+        <h3 id="docStudentName">Student Name</h3>
+        <p>Enrollment: <span id="docEnrollment"></span></p>
+        <p>Document: <span id="docType"></span></p>
+        <p>Upload Date: <span id="docUploadDate"></span></p>
+        <p>File Size: <span id="docFileSize"></span></p>
+        <div style="margin-top: 15px">
+          <button onclick="verifyDoc()">Verify Document</button>
+          <button onclick="rejectDoc()">Reject Document</button>
+          <button onclick="saveDoc()">Save</button>
+        </div>
+      </div>
+      <div
+        id="docOverlay"
+        class="modal-overlay"
+        onclick="closeDocModal()"
+      ></div>
+      <!-- ================= ANALYSIS & INSIGHTS ================= -->
+      <div id="analysis" class="section">
+        <h2 class="admin-title">📊 Analysis & Insights</h2>
+        <p class="admin-sub">
+          Data-driven insights for onboarding optimization
+        </p>
+
+        <!-- KPI Boxes -->
+        <div class="kpi-boxes">
+          <div class="kpi-box">
+            <h3>70%</h3>
+            <p>Completion Rate</p>
+          </div>
+          <div class="kpi-box">
+            <h3>15 Days</h3>
+            <p>Average Time to Complete</p>
+          </div>
+          <div class="kpi-box">
+            <h3>3,200</h3>
+            <p>Active Students</p>
+          </div>
+          <div class="kpi-box">
+            <h3>150</h3>
+            <p>At-Risk Students</p>
+          </div>
+        </div>
+
+        <!-- Department-wise Progress Bar Chart -->
+        <div class="chart-section">
+          <h3>Department-wise Progress</h3>
+          <canvas id="deptChart" height="120"></canvas>
+        </div>
+
+        <!-- Onboarding Status Donut Chart -->
+        <div class="chart-section">
+          <h3>Onboarding Status Distribution</h3>
+          <canvas id="statusDonutChart"></canvas>
+        </div>
+
+        <!-- Monthly Enrollment vs Completion Trend -->
+        <div class="chart-section">
+          <h3>Monthly Enrollment & Completion Trend</h3>
+          <canvas id="enrollmentTrendChart" height="150"></canvas>
+        </div>
+
+        <!-- Task Completion Rate Cards -->
+        <div class="task-rate-boxes">
+          <div class="task-box" onclick="showRiskPopup('Documents')">
+            <h4>Documents</h4>
+            <p>85% Completed</p>
+          </div>
+          <div class="task-box" onclick="showRiskPopup('Fees')">
+            <h4>Fees</h4>
+            <p>75% Completed</p>
+          </div>
+          <div class="task-box" onclick="showRiskPopup('LMS Setup')">
+            <h4>LMS Setup</h4>
+            <p>60% Completed</p>
+          </div>
+          <div class="task-box" onclick="showRiskPopup('Hostel Allocation')">
+            <h4>Hostel Allocation</h4>
+            <p>50% Completed</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Risk Factor Popup Modal -->
+      <div id="riskModal" class="custom-modal">
+        <span class="close-btn" onclick="closeRiskPopup()">×</span>
+        <h3 id="riskTitle">Risk Factor</h3>
+        <ul id="riskList"></ul>
+      </div>
+      <div
+        id="riskOverlay"
+        class="modal-overlay"
+        onclick="closeRiskPopup()"
+      ></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
